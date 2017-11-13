@@ -20,8 +20,8 @@
     "doc_gen": "set TS_NODE_COMPILER_OPTIONS={\"module\":\"commonjs\"} && ts-node doc_generator/lib_docgenerator.ts src/entries/chunks/model.ts",
     "doc_update": "set TS_NODE_COMPILER_OPTIONS={\"module\":\"commonjs\"} && ts-node doc_generator/lib_docupdater.ts",
     "lint": "tslint ./src/**/*.ts -t verbose",
-    "wisely_build": "npm run build_vue_dev && npm run build_vue_prod",
-    "wisely_deploy": "npm run wisely_build && chmod +x ./deploy_wisely.sh && ./deploy_wisely.sh"
+    "wisely_build": "npm run build_vue_dev && npm run build_vue_prod && chmod +x ./deploy_wisely.sh && ./deploy_wisely.sh",
+    "wisely_deploy": "npm run build_vue_dev && npm run build_vue_prod && chmod +x ./deploy_wisely.sh && ./deploy_wisely.sh prod"
   },
   "version": "0.95.0",
   "name": "surveyjs",
@@ -83,5 +83,9 @@
     "vue-property-decorator": "4.0.0",
     "vue-template-compiler": "2.1.10",
     "webpack": "2.2.1"
+  },
+  "engines": {
+    "node": "6.9.4",
+    "npm": ">= 3.0.0"
   }
 }

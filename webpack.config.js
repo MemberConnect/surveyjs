@@ -79,7 +79,11 @@ var platformOptions = {
             }
         },
         keywords: ['vue'],
-        peerDependencies: { 'vue': "^2.1.10" }
+        peerDependencies: { 'vue': "^2.1.10" },
+        engines: {
+            node: "6.9.4",
+            npm: ">= 3.0.0"
+        }
     }
 };
 
