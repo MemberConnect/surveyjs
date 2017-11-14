@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div v-if="false">
-      <slot name="nomodal"></slot>
-    </div>
-    <div v-else>
+    <div v-if="showSelectModal">
       <select v-if="!question.isReadOnly" :id="question.inputId" :class="question.cssClasses.control" v-bind:aria-label="question.locTitle.renderedHtml" @click=popModal>
           <option value=''>{{modalSelectDisplay}}</option>
       </select>
@@ -16,6 +13,9 @@
               <survey-other-choice v-show="question.hasOther && question.isOtherSelected" :class="question.cssClasses.other" :question="question"/>
           </div>
       </modal>
+    </div>
+    <div v-else>
+      <slot name="nomodal"></slot>
     </div>
   </div>
 </template>
@@ -49,6 +49,10 @@
           } else {
               return this.question.optionsCaption
           }
+      }
+
+      get showSelectModal() {
+        return this.question.survey.wiselyCustomizations && this.question.survey.wiselyCustomizations.mobile_android_select
       }
 
       popModal (e) {

@@ -81,6 +81,11 @@
   display: block;
 }
 
+.modal-dialog {
+  max-height: 90vh;
+  overflow: scroll;
+}
+
 .modal-backdrop {
   display: none;
 }
