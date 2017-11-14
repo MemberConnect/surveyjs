@@ -79,10 +79,14 @@ var platformOptions = {
             }
         },
         keywords: ['vue'],
-        peerDependencies: { 'vue': "^2.1.10" },
+        peerDependencies: {
+            vue: '^2.1.10',
+            'vue-simple-breakpoints': '^1.0.3',
+            jquery: '^3.1.1'
+        },
         engines: {
-            node: "6.9.4",
-            npm: ">= 3.0.0"
+            node: '6.9.4',
+            npm: '>= 3.0.0'
         }
     }
 };

@@ -46,3 +46,5 @@ export {default as PanelDynamicProgress} from '../vue/paneldynamicprogress.vue';
 export {default as Progress} from '../vue/progress.vue';
 export {default as Panel} from '../vue/panel.vue';
 export {default as Row} from '../vue/row.vue';
+export {default as Modal} from '../vue/modal.vue';
+export {default as SelectModal} from '../vue/selectmodal.vue';

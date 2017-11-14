@@ -329,7 +329,7 @@ export class SurveyModel extends Base implements ISurvey, ISurveyData, ISurveyIm
      */
     public jsonErrors: Array<JsonError> = null;
 
-    constructor(jsonObj: any = null) {
+    constructor(jsonObj: any = null, wiselyCustomizationObj: any = null ) {
         super();
         var self = this;
         var locTitleValue = this.createLocalizableString("title", this, true);
@@ -359,6 +359,14 @@ export class SurveyModel extends Base implements ISurvey, ISurveyData, ISurveyIm
             this.setJsonObject(jsonObj);
             if (this.surveyId) {
                 this.loadSurveyFromService(this.surveyId, this.clientId);
+            }
+        }
+        if (wiselyCustomizationObj) {
+            if (typeof wiselyCustomizationObj === 'string' || wiselyCustomizationObj instanceof String) {
+                wiselyCustomizationObj = JSON.parse(wiselyCustomizationObj as string);
+            }
+            if(wiselyCustomizationObj) {
+                this.wiselyCustomizations = wiselyCustomizationObj;
             }
         }
         this.onCreating();
@@ -1822,6 +1830,11 @@ export class SurveyModel extends Base implements ISurvey, ISurveyData, ISurveyIm
             this.setValue(name, value);
         }
     }
+    /**
+     * Use this property to store Wisely-specific customizations for SurveyJS
+     */
+    private get wiselyCustomizations(): object { return this.getPropertyValue("wiselyCustomizations", ""); }
+    private set wiselyCustomizations(val: object) { this.setPropertyValue("wiselyCustomizations", val); }
 }
 
 JsonObject.metaData.addClass("survey", [{ name: "locale", choices: () => { return surveyLocalization.getLocales() } },

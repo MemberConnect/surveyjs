@@ -1,11 +1,15 @@
 <template>
     <div :class="question.cssClasses.root">
-        <select v-if="!question.isReadOnly" :id="question.inputId" v-model="value" :class="question.cssClasses.control" v-bind:aria-label="question.locTitle.renderedHtml">
-            <option value=''>{{question.optionsCaption}}</option>
-            <option v-for="(item, index) in question.visibleChoices" :value="item.value">{{item.text}}</option>
-        </select>
-        <div v-else :text="question.displayValue" :class="question.cssClasses.control"></div>
-        <survey-other-choice v-show="question.hasOther && question.isOtherSelected" :class="question.cssClasses.other" :question="question"/>
+        <select-modal :value="value" :question="question">
+            <div slot="nomodal">
+                <select v-if="!question.isReadOnly" :id="question.inputId" v-model="value" :class="question.cssClasses.control" v-bind:aria-label="question.locTitle.renderedHtml">
+                    <option value=''>{{question.optionsCaption}}</option>
+                    <option v-for="(item, index) in question.visibleChoices" :value="item.value">{{item.text}}</option>
+                </select>
+                <div v-else :text="question.displayValue" :class="question.cssClasses.control"></div>
+                <survey-other-choice v-show="question.hasOther && question.isOtherSelected" :class="question.cssClasses.other" :question="question"/>
+            </div>
+        </select-modal>
     </div>
 </template>
 

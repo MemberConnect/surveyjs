@@ -18,7 +18,8 @@ function init() {
             { type: "rating", name: "recommend friends", visibleIf: "{satisfaction} > 3",
                 title: "How likely are you to recommend the Product to a friend or co-worker?",
                 mininumRateDescription: "Will not recommend", maximumRateDescription: "I will recommend" },
-            { type: "comment", name: "suggestions", title:"What would make you more satisfied with the Product?", }
+            { type: "comment", name: "suggestions", title:"What would make you more satisfied with the Product?", },
+            { type: "dropdown", name: "dropdowntest", title: "Pick something", "choices":[{"value":"item1","text":"1960 or before"},{"value":"item2","text":"1961"},{"value":"item3","text":"1962"},{"value":"item4","text":"1963"}]}
         ]},
         {questions: [
             { type: "radiogroup", name: "price to competitors",
