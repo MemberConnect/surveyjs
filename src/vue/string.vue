@@ -19,14 +19,12 @@
         @Prop
         strip: Boolean
 
-        html: String
-
-        created () {
+        get html () {
             if (this.strip) {
                 // convert <br /> and \n to spaces
-                this.html = this.locString.renderedHtml.replace(/<br\s*[\/]?>/gi, ' ').replace(/(?:\r\n|\r|\n)/g, ' ')
+                return this.locString.renderedHtml.replace(/<br\s*[\/]?>/gi, ' ').replace(/(?:\r\n|\r|\n)/g, ' ')
             } else {
-                this.html = this.locString.renderedHtml
+                return this.locString.renderedHtml
             }
         }
     }
