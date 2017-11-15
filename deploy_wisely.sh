@@ -7,7 +7,6 @@ cp -a -f ../surveyjs/packages/survey-vue/. .
 if [ "$1" = "prod" ]; then
   git add .
   git commit -a -m 'building'
-  npm version prerelease -m "Upgrade to %s"
-  git tag
+  git tag '%s'
   git push origin master --tags
 fi
