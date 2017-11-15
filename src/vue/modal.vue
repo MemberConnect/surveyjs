@@ -1,6 +1,6 @@
 <template>
   <div @click="closeModal">
-    <div class="modal fade" :class="{in: showModal, centered: centered}" tabindex="-1" role="dialog">
+    <div class="modal fade" :class="{in: open, centered: centered}" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <slot name="header" class="modal-header">
@@ -12,34 +12,29 @@
         </div>
       </div>
     </div>
-    <div class="modal-backdrop fade" :class="{in: showModal}" data-id="backdrop"></div>
+    <div class="modal-backdrop fade" :class="{in: open}" data-id="backdrop"></div>
   </div>
 </template>
 
 <script lang="ts">
   import Vue from 'vue'
-  import {Component, Prop} from 'vue-property-decorator'
+  import {Component, Prop, Watch} from 'vue-property-decorator'
 
   @Component
   export default class Modal extends Vue {
     @Prop
-    show: Boolean
+    open: Boolean
 
     @Prop
     centered: Boolean
 
-    get showModal () {
-      return this.show
-    }
-
-    set showModal (show) {
-      this.showModal = show
-    }
+    @Prop
+    closed: any
 
     closeModal (e) {
       let bgClick = e.type === 'click' && e.target.classList.contains('modal')
       if (e.keyCode === 27 || bgClick) {
-        this.showModal = false
+        this.$emit('closed', true)
       }
     }
 

@@ -4,10 +4,10 @@
       <select v-if="!question.isReadOnly" :id="question.inputId" :class="question.cssClasses.control" v-bind:aria-label="question.locTitle.renderedHtml" @click=popModal>
           <option value=''>{{modalSelectDisplay}}</option>
       </select>
-      <modal :show="showModal" :centered="true">
+      <modal :open="showModal" :centered="true" @closed="modalClosed">
           <div slot="body">
               <ul v-if="!question.isReadOnly" v-bind:aria-label="question.locTitle.renderedHtml" class="list-unstyled">
-                  <li v-for="(item, index) in question.visibleChoices" :value="item.value" class="list-choices" @click="selectFromModal(item.value)" :class="{selected: value === item.value}">{{item.text}}</li>
+                  <li v-for="(item, index) in question.visibleChoices" :value="item.value" class="list-choice" @click="selectFromModal(item.value)" :class="{selected: model === item.value}">{{item.text}}</li>
               </ul>
               <div v-else :text="question.displayValue" :class="question.cssClasses.control"></div>
               <survey-other-choice v-show="question.hasOther && question.isOtherSelected" :class="question.cssClasses.other" :question="question"/>
@@ -30,15 +30,18 @@
       question: any
 
       @Prop
-      value: any
+      model: any
+
+      @Prop
+      selected: any
 
       showModal: Boolean = false
 
       get modalSelectDisplay() {
-          if (this.value) {
+          if (this.model) {
               let selected = null
               this.question.visibleChoices.forEach(q => {
-                  if (q.value === this.value) selected = q
+                  if (q.value === this.model) selected = q
               })
 
               if (selected && selected.text) {
@@ -63,8 +66,12 @@
       }
 
       selectFromModal (val) {
-          this.value = val
+          this.$emit('selected', val)
           this.showModal = false
+      }
+
+      modalClosed (closed) {
+        this.showModal = !closed
       }
   }
 
@@ -72,25 +79,22 @@
 </script>
 
 <style scoped>
-.list-choices {
+.list-choice {
     cursor: pointer;
     padding: 1.5em 1em;
     border-bottom:  1px solid #ccc;
+    position: relative;
 }
 
-.list-choices:first-child {
+.list-choice:first-child {
     border-top-right-radius: 6px;
     border-top-left-radius: 6px;
 }
 
-.list-choices:last-child {
+.list-choice:last-child {
     border-bottom: 0;
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;
-}
-
-.list-choices.selected {
-    background-color: #ccc;
 }
 
 .list-unstyled {

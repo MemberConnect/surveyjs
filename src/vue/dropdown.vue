@@ -1,6 +1,6 @@
 <template>
     <div :class="question.cssClasses.root">
-        <select-modal :value="value" :question="question">
+        <select-modal :model="value" :question="question" @selected="selected">
             <div slot="nomodal">
                 <select v-if="!question.isReadOnly" :id="question.inputId" v-model="value" :class="question.cssClasses.control" v-bind:aria-label="question.locTitle.renderedHtml">
                     <option value=''>{{question.optionsCaption}}</option>
@@ -26,6 +26,10 @@
         }
         set value(newVal) {
             this.question.value = newVal === '' ? undefined : newVal;
+        }
+
+        selected(val) {
+            this.value = val
         }
     }
     Vue.component("survey-dropdown", Dropdown)
