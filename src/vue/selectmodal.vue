@@ -10,9 +10,9 @@
                   <li v-for="(item, index) in question.visibleChoices" :value="item.value" class="list-choice" @click="selectFromModal(item.value)" :class="{selected: model === item.value}">{{item.text}}</li>
               </ul>
               <div v-else :text="question.displayValue" :class="question.cssClasses.control"></div>
-              <survey-other-choice v-show="question.hasOther && question.isOtherSelected" :class="question.cssClasses.other" :question="question"/>
           </div>
       </modal>
+      <survey-other-choice v-show="question.hasOther && question.isOtherSelected" :class="question.cssClasses.other" :question="question"/>
     </div>
     <div v-else>
       <slot name="nomodal"></slot>
