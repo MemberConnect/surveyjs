@@ -10,8 +10,8 @@
 
 ## To deploy:
 * `npm run wisely_deploy`
-* This builds the vue files, bumps the version and pushes them to the `survey-vue-build` repo
-* After changes are deployed, artemius's `package.json` needs to be updated to point the `survey-vue` entry to the new commit ID to pull down changes
+* This builds the vue files, bumps the prerelease version (so our releases will always be `vX.X.X-Y` where `vX.X.X` is the release from the original SurveyJS that we are currently using), tags it and pushes to the `survey-vue-build` repo
+* After changes are deployed, artemius's `package.json` needs to be updated to point the `survey-vue` entry to the new tag to pull down changes
 
 ### Why `npm peerDependencies`?
 Because this repo only produces built files that will always be used within artemius, we should rely on `artemius` to provide external libraries so that we don't:
