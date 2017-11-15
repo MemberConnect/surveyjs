@@ -23,7 +23,7 @@
     "wisely_build": "npm run build_vue_dev && chmod +x ./deploy_wisely.sh && ./deploy_wisely.sh",
     "wisely_deploy": "npm version prerelease -m 'release %s' && npm run build_vue_dev && npm run build_vue_prod && chmod +x ./deploy_wisely.sh && ./deploy_wisely.sh prod"
   },
-  "version": "0.95.0-4",
+  "version": "0.95.0-5",
   "name": "surveyjs",
   "private": true,
   "devDependencies": {
