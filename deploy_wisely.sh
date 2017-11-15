@@ -7,6 +7,6 @@ cp -a -f ../surveyjs/packages/survey-vue/. .
 if [ "$1" = "prod" ]; then
   git add .
   git commit -a -m 'building'
-  git tag '%s'
+  git tag $(node -pe "require('./package.json').version")
   git push origin master --tags
 fi
