@@ -5,8 +5,9 @@ fi
 cd survey-vue-build
 cp -a -f ../surveyjs/packages/survey-vue/. .
 if [ "$1" = "prod" ]; then
+  version = $(node -pe "'v' + require('./package.json').version")
   git add .
-  git commit -a -m 'building'
-  git tag $(node -pe "'v' + require('./package.json').version")
+  git commit -a -m 'Upgrade to ' + $version
+  git tag $version
   git push origin master --tags
 fi
