@@ -31,11 +31,15 @@
                 <tr v-for="(row, rowIndex) in question.visibleRows" :class="question.cssClasses.row">
                     <td v-show="question.hasRows"><survey-string :locString="row.locText"/></td>
                     <td>
-                        <select :class="question.cssClasses.label" :style="{'margin': '0', 'width': '100%', 'background': '#E9ECF2'}" v-model="row.value">
-                            <option v-for="(column, columnIndex) in question.columns" :class="question.cssClasses.itemValue" :name="row.fullName" :value="column.value" :disabled="question.isReadOnly" :id="(columnIndex === 0) && (rowIndex === 0) ? question.inputId : ''">
-                                <survey-string :locString="column.locText"/>
-                            </option>
-                        </select>
+                        <select-modal :model="row.value" :question="question" @selected="(val) => row.value=val">
+                            <div slot="nomodal">
+                                <select :class="question.cssClasses.label" :style="{'margin': '0', 'width': '100%', 'background': '#E9ECF2'}" v-model="row.value">
+                                    <option v-for="(column, columnIndex) in question.columns" :class="question.cssClasses.itemValue" :name="row.fullName" :value="column.value" :disabled="question.isReadOnly" :id="(columnIndex === 0) && (rowIndex === 0) ? question.inputId : ''">
+                                        <survey-string :locString="column.locText"/>
+                                    </option>
+                                </select>
+                            </div>
+                        </select-modal>
                     </td>
                 </tr>
             </tbody>

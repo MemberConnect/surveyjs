@@ -7,7 +7,12 @@
       <modal :open="showModal" :centered="true" @closed="modalClosed">
           <div slot="body">
               <ul v-if="!question.isReadOnly" v-bind:aria-label="question.locTitle.renderedHtml" class="list-unstyled">
+                  <!-- dropdown -->
                   <li v-for="(item, index) in question.visibleChoices" :value="item.value" class="list-choice" @click="selectFromModal(item.value)" :class="{selected: model === item.value}">{{item.text}}</li>
+                  <!-- matrix -->
+                  <li v-for="(column, index) in question.columns" :value="column.value" class="list-choice" @click="selectFromModal(column.value)" :class="{selected: model === column.value}">
+                    <survey-string :locString="column.locText"/>
+                  </li>
               </ul>
               <div v-else :text="question.displayValue" :class="question.cssClasses.control"></div>
           </div>
@@ -43,22 +48,31 @@
       get modalSelectDisplay() {
           if (this.model) {
               let selected = null
-              this.question.visibleChoices.forEach(q => {
-                  if (q.value === this.model) selected = q
-              })
+
+              if (this.question.visibleChoices) {
+                // dropdown
+                this.question.visibleChoices.forEach(q => {
+                    if (q.value === this.model) selected = q
+                })
+              } else {
+                // matrix
+                this.question.columns.forEach(c => {
+                    if (c.value === this.model) selected = c
+                })
+              }
 
               if (selected && selected.text) {
                   return selected.text
               } else {
-                  return this.question.optionsCaption
+                  return this.question.optionsCaption || 'Choose'
               }
           } else {
-              return this.question.optionsCaption
+              return this.question.optionsCaption || 'Choose'
           }
       }
 
       get showSelectModal() {
-        return this.question.survey.wiselyCustomizations && this.question.survey.wiselyCustomizations.mobile_android_select && this.$breakpoints.isMobile()
+        return this.question.survey.wiselyCustomizations && this.question.survey.wiselyCustomizations.mobile_android_select && (this.$breakpoints.isMobile() || this.$breakpoints.isTablet())
       }
 
       popModal (e) {
