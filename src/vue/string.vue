@@ -1,7 +1,7 @@
 <template>
     <span style="position: static;">
-        <span style="position: static;" v-if="locString.hasHtml" v-html="locString.renderedHtml"></span>
-        <span style="position: static;" v-else>{{locString.renderedHtml}}</span>
+        <span style="position: static;" v-if="locString.hasHtml" v-html="html"></span>
+        <span style="position: static;" v-else>{{html}}</span>
     </span>
 </template>
 
@@ -14,6 +14,21 @@
     export default class SurveyString extends Vue {
         @Prop
         locString: LocalizableString
+
+        // used to display values within an <option>
+        @Prop
+        strip: Boolean
+
+        html: String
+
+        created () {
+            if (this.strip) {
+                // convert <br /> and \n to spaces
+                this.html = this.locString.renderedHtml.replace(/<br\s*[\/]?>/gi, ' ').replace(/(?:\r\n|\r|\n)/g, ' ')
+            } else {
+                this.html = this.locString.renderedHtml
+            }
+        }
     }
 
     Vue.component("survey-string", SurveyString)

@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="select-modal">
     <div v-if="showSelectModal">
-      <select v-if="!question.isReadOnly" :id="question.inputId" :class="question.cssClasses.control" v-bind:aria-label="question.locTitle.renderedHtml" @click=popModal>
-          <option value=''>{{modalSelectDisplay}}</option>
+      <select v-if="!question.isReadOnly" :id="question.inputId" :class="question.cssClasses.control" v-bind:aria-label="question.locTitle.renderedHtml" @click="popModal">
+          <option value="">{{stripBr(modalSelectDisplay)}}</option>
       </select>
       <modal :open="showModal" :centered="true" @closed="modalClosed">
           <div slot="body">
@@ -11,7 +11,7 @@
                   <li v-for="(item, index) in question.visibleChoices" :value="item.value" class="list-choice" @click="selectFromModal(item.value)" :class="{selected: model === item.value}">{{item.text}}</li>
                   <!-- matrix -->
                   <li v-for="(column, index) in question.columns" :value="column.value" class="list-choice" @click="selectFromModal(column.value)" :class="{selected: model === column.value}">
-                    <survey-string :locString="column.locText"/>
+                    <survey-string :locString="column.locText" :strip="true" />
                   </li>
               </ul>
               <div v-else :text="question.displayValue" :class="question.cssClasses.control"></div>
@@ -62,7 +62,7 @@
               }
 
               if (selected && selected.text) {
-                  return selected.text
+                  return this.stripBr(selected.text)
               } else {
                   return this.question.optionsCaption || 'Choose'
               }
@@ -89,6 +89,10 @@
 
       modalClosed (closed) {
         this.showModal = !closed
+      }
+
+      stripBr (str) {
+        return str.replace(/<br\s*[\/]?>/gi, ' ')
       }
   }
 

@@ -35,7 +35,7 @@
                             <div slot="nomodal">
                                 <select :class="question.cssClasses.label" :style="{'margin': '0', 'width': '100%', 'background': '#E9ECF2'}" v-model="row.value">
                                     <option v-for="(column, columnIndex) in question.columns" :class="question.cssClasses.itemValue" :name="row.fullName" :value="column.value" :disabled="question.isReadOnly" :id="(columnIndex === 0) && (rowIndex === 0) ? question.inputId : ''">
-                                        <survey-string :locString="column.locText"/>
+                                        <survey-string :locString="column.locText" :strip="true"/>
                                     </option>
                                 </select>
                             </div>
@@ -67,6 +67,10 @@
 
 .wisely-small-matrix {
     display: none;
+}
+
+.wisely-small-matrix .select-modal select {
+    width: 100%;
 }
 
 @media screen and (max-width: 767px) {
