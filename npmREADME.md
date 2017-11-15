@@ -1,3 +1,8 @@
+### Wisely Instructions
+** See README of [forked SurveyJS](https://github.com/chriszamierowski/surveyjs/blob/wisely-dev/README.md)**
+
+#### Original README:
+
 survey.js is a JavaScript Survey Library. It is a modern way to add a survey to your website. It uses JSON for survey metadata and results.
 [![Build Status](https://travis-ci.org/surveyjs/surveyjs.svg?branch=master)](https://travis-ci.org/surveyjs/surveyjs)
 

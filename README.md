@@ -1,3 +1,28 @@
+# Wisely instructions
+* This repo should be cloned alongside `artemius`
+* All development and deploys should be done on the `wisely-dev` branch (or branched off of it). `wisely-dev` should **never** be merged into `master`. `master` should only be used to merge updates from the original `surveyjs` repo, which should in turn be merged into `wisely-dev`. This allows us to branch significantly from the original repo, but still merge in updates as needed.
+
+## To develop locally:
+* make changes to source code within this repo
+* `npm run wisely_build`
+* This will automatically create (or update) `./../survey-vue-build` with built files
+* To use these updates locally, use `npm link` e.g. `cd ./../survey-vue-build && npm link && cd ./../artemius && npm link survey-vue`. When done developing locally, run `npm unlink survey-vue` from `./../artemius` root
+
+## To deploy:
+* `npm run wisely_deploy`
+* This builds the vue files, bumps the version and pushes them to the `survey-vue-build` repo
+* After changes are deployed, artemius's `package.json` needs to be updated to point the `survey-vue` entry to the new commit ID to pull down changes
+
+### Why `npm peerDependencies`?
+Because this repo only produces built files that will always be used within artemius, we should rely on `artemius` to provide external libraries so that we don't:
+1. have duplicate code included
+1. have conflicting versions
+1. have to track `survey-vue-build/node_modules` in git
+1. have to do another `npm install` within `survey-vue-build` when building or when building artemius
+
+
+#### Original README:
+
 **survey.js** is a JavaScript Survey Library. It is a modern way to add a survey to your website. It uses JSON for survey metadata and results.
 [![Build Status](https://travis-ci.org/surveyjs/surveyjs.svg?branch=master)](https://travis-ci.org/surveyjs/surveyjs) [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE)
 
