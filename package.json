@@ -21,9 +21,9 @@
     "doc_update": "set TS_NODE_COMPILER_OPTIONS={\"module\":\"commonjs\"} && ts-node doc_generator/lib_docupdater.ts",
     "lint": "tslint ./src/**/*.ts -t verbose",
     "wisely_build": "npm run build_vue_dev && chmod +x ./deploy_wisely.sh && ./deploy_wisely.sh",
-    "wisely_deploy": "npm version prerelease && npm run build_vue_dev && npm run build_vue_prod && chmod +x ./deploy_wisely.sh && ./deploy_wisely.sh prod"
+    "wisely_deploy": "npm version prerelease -m 'release %s` && npm run build_vue_dev && npm run build_vue_prod && chmod +x ./deploy_wisely.sh && ./deploy_wisely.sh prod"
   },
-  "version": "0.95.0-0",
+  "version": "0.95.0-1",
   "name": "surveyjs",
   "private": true,
   "devDependencies": {
