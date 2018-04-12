@@ -42,7 +42,7 @@
 
       showModal: Boolean = false
 
-      // these will be automatically included by vue-simple-breakpoints from artemius
+      // these will be automatically included by vue-simple-breakpoints from dashboard-client
       $breakpoints: any
 
       get modalSelectDisplay() {
@@ -72,7 +72,7 @@
       }
 
       get showSelectModal() {
-        return this.question.survey.wiselyCustomizations && this.question.survey.wiselyCustomizations.mobile_android_select && (this.$breakpoints.isMobile() || this.$breakpoints.isTablet())
+        return this.question.survey.memberconnectCustomizations && this.question.survey.memberconnectCustomizations.mobile_android_select && (this.$breakpoints.isMobile() || this.$breakpoints.isTablet())
       }
 
       popModal (e) {

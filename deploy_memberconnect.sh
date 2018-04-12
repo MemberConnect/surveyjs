@@ -1,6 +1,6 @@
 cd ..
 if [ ! -d "survey-vue-build" ]; then
-  git clone git@github.com:PayWisely/survey-vue-build.git
+  git clone git@github.com:MemberConnect/survey-vue-build.git
 fi
 cd survey-vue-build
 cp -a -f ../surveyjs/packages/survey-vue/. .

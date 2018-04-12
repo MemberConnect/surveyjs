@@ -1,34 +1,34 @@
-# Wisely instructions
-* This repo should be cloned alongside `artemius`
-* All development and deploys should be done on the `wisely-dev` branch (or branched off of it). This allows us to branch significantly from the original repo, but still merge in updates as needed (see [Merging SurveyJS Changes](#merging-surveyjs-changes))
+# MemberConnect instructions
+* This repo should be cloned alongside `dashboard-client`
+* All development and deploys should be done on the `memberconnect-dev` branch (or branched off of it). This allows us to branch significantly from the original repo, but still merge in updates as needed (see [Merging SurveyJS Changes](#merging-surveyjs-changes))
 
 ## To develop locally:
-* `git checkout wisely-dev && git checkout -b feature/some-feature`
+* `git checkout memberconnect-dev && git checkout -b feature/some-feature`
 * make changes to source code within this repo
-* `npm run wisely_build`
+* `npm run memberconnect_build`
 * This will automatically create (or update) `./../survey-vue-build` with built files
-* To use these updates locally, use `npm link` e.g. `cd ./../survey-vue-build && npm link && cd ./../artemius && npm link survey-vue`. When done developing locally, run `npm unlink survey-vue` from `./../artemius` root
-* When development is done, merge `feature/some-feature` into `wisely-dev` and deploy
+* To use these updates locally, use `npm link` e.g. `cd ./../survey-vue-build && npm link && cd ./../dashboard-client && npm link survey-vue`. When done developing locally, run `npm unlink survey-vue` from `./../dashboard-client` root
+* When development is done, merge `feature/some-feature` into `memberconnect-dev` and deploy
 
 ## To deploy:
-* `npm run wisely_deploy`
+* `npm run memberconnect_deploy`
 * This bumps the prerelease version (so our releases will always be `vX.X.X-Y` where `vX.X.X` is the release from the original SurveyJS that we are currently using), builds the Vue files, creates a tag and pushes to the `survey-vue-build` repo
-* After changes are deployed, artemius's `package.json` needs to be updated to point the `survey-vue` entry to the new tag to pull down changes (and `npm update` needs to be run)
+* After changes are deployed, dashboard-client's `package.json` needs to be updated to point the `survey-vue` entry to the new tag to pull down changes (and `npm update` needs to be run)
 
 ## Merging SurveyJS Changes
-`wisely-dev` should **never** be merged into `master`. `master` should only be used to merge updates from the original `surveyjs` repo, which should in turn be merged into `wisely-dev`
+`memberconnect-dev` should **never** be merged into `master`. `master` should only be used to merge updates from the original `surveyjs` repo, which should in turn be merged into `memberconnect-dev`
 * `git checkout master && git pull`
-* `git checkout wisely-dev && git merge master`
+* `git checkout memberconnect-dev && git merge master`
 * merge accordingly
 * manually update `version` in `surveyjs/package.json` to be a prerelease (`-0`) for whatever version SurveyJS was updated to. For example, if the new changes are `v0.96.1`, change `package.json` to `v0.96.1-0`. This repo should always have a `version` with a `-0` on the end. This is needed because otherwise when we run `npm version prerelease` on the built files, the patch will be bumped (see [here](https://docs.npmjs.com/misc/semver#functions) for more) and the version will be out of sync and likely conflicting with the original SurveyJS releases
-* run an `npm run wisely_deploy` to get the latest changes merged and pushed
+* run an `npm run memberconnect_deploy` to get the latest changes merged and pushed
 
 ### Why `npm peerDependencies`?
-Because this repo only produces built files that will always be used within artemius, we should rely on `artemius` to provide external libraries so that we don't:
+Because this repo only produces built files that will always be used within dashboard-client, we should rely on `dashboard-client` to provide external libraries so that we don't:
 1. have duplicate code included
 1. have conflicting versions
 1. have to track `survey-vue-build/node_modules` in git
-1. have to do another `npm install` within `survey-vue-build` when building or when building artemius
+1. have to do another `npm install` within `survey-vue-build` when building or when building dashboard-client
 
 
 #### Original README:

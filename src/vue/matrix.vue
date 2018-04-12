@@ -1,6 +1,6 @@
 <template>
     <div>
-        <table :class="question.cssClasses.root" class="wisely-big-matrix">
+        <table :class="question.cssClasses.root" class="memberconnect-big-matrix">
             <thead>
                 <tr>
                     <th v-show="question.hasRows"></th>
@@ -20,7 +20,7 @@
                 </tr>
             </tbody>
         </table>
-        <table :class="question.cssClasses.root" class="wisely-small-matrix">
+        <table :class="question.cssClasses.root" class="memberconnect-small-matrix">
             <thead>
                 <tr>
                     <th v-show="question.hasRows"></th>
@@ -61,34 +61,34 @@
 
 <style>
 
-.wisely-big-matrix {
+.memberconnect-big-matrix {
     display: table;
 }
 
-.wisely-small-matrix {
+.memberconnect-small-matrix {
     display: none;
 }
 
-.wisely-small-matrix .select-modal select {
+.memberconnect-small-matrix .select-modal select {
     width: 100%;
 }
 
 @media screen and (max-width: 767px) {
-    .wisely-big-matrix {
+    .memberconnect-big-matrix {
         display: none;
     }
 
-    .wisely-small-matrix {
+    .memberconnect-small-matrix {
         display: table;
     }
 }
 
 @media screen and (max-width: 480px) {
-    .wisely-big-matrix {
+    .memberconnect-big-matrix {
         display: none;
     }
 
-    .wisely-small-matrix {
+    .memberconnect-small-matrix {
         display: table;
     }
 }

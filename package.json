@@ -20,8 +20,8 @@
     "doc_gen": "set TS_NODE_COMPILER_OPTIONS={\"module\":\"commonjs\"} && ts-node doc_generator/lib_docgenerator.ts src/entries/chunks/model.ts",
     "doc_update": "set TS_NODE_COMPILER_OPTIONS={\"module\":\"commonjs\"} && ts-node doc_generator/lib_docupdater.ts",
     "lint": "tslint ./src/**/*.ts -t verbose",
-    "wisely_build": "npm run build_vue_dev && chmod +x ./deploy_wisely.sh && ./deploy_wisely.sh",
-    "wisely_deploy": "npm version prerelease -m 'release %s' && npm run build_vue_dev && npm run build_vue_prod && chmod +x ./deploy_wisely.sh && ./deploy_wisely.sh prod"
+    "memberconnect_build": "npm run build_vue_dev && chmod +x ./deploy_memberconnect.sh && ./deploy_memberconnect.sh",
+    "memberconnect_deploy": "npm version prerelease -m 'release %s' && npm run build_vue_dev && npm run build_vue_prod && chmod +x ./deploy_memberconnect.sh && ./deploy_memberconnect.sh prod"
   },
   "version": "0.95.0-6",
   "name": "surveyjs",

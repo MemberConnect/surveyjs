@@ -1,5 +1,5 @@
-### Wisely Instructions
-** See README of [forked SurveyJS](https://github.com/PayWisely/surveyjs/blob/wisely-dev/README.md)**
+### MemberConnect Instructions
+** See README of [forked SurveyJS](https://github.com/MemberConnect/surveyjs/blob/memberconnect-dev/README.md)**
 
 #### Original README:
 

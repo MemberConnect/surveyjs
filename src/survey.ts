@@ -329,7 +329,7 @@ export class SurveyModel extends Base implements ISurvey, ISurveyData, ISurveyIm
      */
     public jsonErrors: Array<JsonError> = null;
 
-    constructor(jsonObj: any = null, wiselyCustomizationObj: any = null ) {
+    constructor(jsonObj: any = null, memberconnectCustomizationObj: any = null ) {
         super();
         var self = this;
         var locTitleValue = this.createLocalizableString("title", this, true);
@@ -361,12 +361,12 @@ export class SurveyModel extends Base implements ISurvey, ISurveyData, ISurveyIm
                 this.loadSurveyFromService(this.surveyId, this.clientId);
             }
         }
-        if (wiselyCustomizationObj) {
-            if (typeof wiselyCustomizationObj === 'string' || wiselyCustomizationObj instanceof String) {
-                wiselyCustomizationObj = JSON.parse(wiselyCustomizationObj as string);
+        if (memberconnectCustomizationObj) {
+            if (typeof memberconnectCustomizationObj === 'string' || memberconnectCustomizationObj instanceof String) {
+                memberconnectCustomizationObj = JSON.parse(memberconnectCustomizationObj as string);
             }
-            if(wiselyCustomizationObj) {
-                this.wiselyCustomizations = wiselyCustomizationObj;
+            if(memberconnectCustomizationObj) {
+                this.memberconnectCustomizations = memberconnectCustomizationObj;
             }
         }
         this.onCreating();
@@ -1831,10 +1831,10 @@ export class SurveyModel extends Base implements ISurvey, ISurveyData, ISurveyIm
         }
     }
     /**
-     * Use this property to store Wisely-specific customizations for SurveyJS
+     * Use this property to store MemberConnect-specific customizations for SurveyJS
      */
-    private get wiselyCustomizations(): object { return this.getPropertyValue("wiselyCustomizations", ""); }
-    private set wiselyCustomizations(val: object) { this.setPropertyValue("wiselyCustomizations", val); }
+    private get memberconnectCustomizations(): object { return this.getPropertyValue("memberconnectCustomizations", ""); }
+    private set memberconnectCustomizations(val: object) { this.setPropertyValue("memberconnectCustomizations", val); }
 }
 
 JsonObject.metaData.addClass("survey", [{ name: "locale", choices: () => { return surveyLocalization.getLocales() } },
